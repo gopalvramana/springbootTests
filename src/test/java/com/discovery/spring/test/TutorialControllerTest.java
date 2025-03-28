@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -66,6 +67,19 @@ public class TutorialControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].title").value("Spring Boot @WebMvcTest"));
+    }
+
+    @Test
+    public void getTutorialById() throws Exception {
+        long id = 1L;
+        given(tutorialService.getTutorialById(id)).willReturn(Optional.of(tutorial));
+
+        //Perform the HTTP GET request and check the result
+        mockMvc.perform(get("/api/tutorials/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.title").value("Spring Boot @WebMvcTest"));
+
     }
 
 
