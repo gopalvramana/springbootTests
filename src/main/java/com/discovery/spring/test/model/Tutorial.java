@@ -1,6 +1,8 @@
-package com.bezkoder.spring.test.model;
+package com.discovery.spring.test.model;
 
 import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "tutorials")
@@ -69,4 +71,15 @@ public class Tutorial {
     return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    Tutorial tutorial = (Tutorial) o;
+    return id == tutorial.id && published == tutorial.published && Objects.equals(title, tutorial.title) && Objects.equals(description, tutorial.description);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, title, description, published);
+  }
 }

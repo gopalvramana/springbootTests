@@ -1,4 +1,4 @@
-package com.bezkoder.spring.test;
+package com.discovery.spring.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
